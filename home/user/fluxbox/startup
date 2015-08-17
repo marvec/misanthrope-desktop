@@ -1,0 +1,38 @@
+#!/bin/sh
+#
+# fluxbox startup-script:
+#
+# Lines starting with a '#' are ignored.
+
+# Change your keymap:
+#xmodmap "/home/mvecera/.Xmodmap"
+xrandr --output HDMI3 --auto --right-of LVDS1 --set audio force-dvi
+
+# Applications you want to run with fluxbox.
+# MAKE SURE THAT APPS THAT KEEP RUNNING HAVE AN ''&'' AT THE END.
+#
+# unclutter -idle 2 &
+# wmnd &
+# wmsmixer -w &
+# idesk &
+
+/usr/lib/xfce4/notifyd/xfce4-notifyd &
+xscreensaver -nosplash &
+
+sudo hciconfig hci0 up
+
+stardict -h &
+osdsh&
+osdctl -S /home/mvecera/.fluxbox/styles/osd.theme
+nm-applet &
+batti &
+blueman-applet &
+
+xset r rate 250 30
+
+# And last but not least we start fluxbox.
+# Because it is the last app you have to run it with ''exec'' before it.
+
+exec fluxbox
+# or if you want to keep a log:
+# exec fluxbox -log "/home/marvec/.fluxbox/log"
